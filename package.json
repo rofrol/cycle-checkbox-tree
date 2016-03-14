@@ -1,0 +1,37 @@
+{
+  "name": "cycle-checkbox-tree",
+  "version": "1.0.0",
+  "description": "cycle.js checkbox tree",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack --progress --colors --watch",
+    "dev": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rofrol/cycle-checkbox-tree.git"
+  },
+  "author": "Roman Frołow <rofrol@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/rofrol/cycle-checkbox-tree/issues"
+  },
+  "homepage": "https://github.com/rofrol/cycle-checkbox-tree#readme",
+  "dependencies": {
+    "@cycle/core": "^6.0.3",
+    "@cycle/dom": "^9.2.2",
+    "rx": "^4.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.3.26",
+    "babel-eslint": "^5.0.0",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "eslint": "^2.4.0",
+    "eslint-config-airbnb": "^6.1.0",
+    "eslint-config-cycle": "^3.2.0",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.1"
+  }
+}

@@ -37,8 +37,9 @@ function children2DOM(children) {
 				children[key].checked && (this.checked = true);
 			}),
 			span(children[key].checked ? 'ON' : 'off'),
+			children2DOM(children[key].children),
 		])
-	));
+	)) || [];
 }
 
 Cycle.run(
@@ -49,27 +50,7 @@ Cycle.run(
 			return checkboxes;
 		})
 		.startWith('')
-		.map(() =>
-			ul([
-				li([
-					input(new function() {
-					    this.type = "checkbox";
-						this.value = "one";
-					    checkboxes.one.checked && (this.checked = true);
-					}),
-					span(checkboxes.one.checked ? 'ON' : 'off'),
-					children2DOM(checkboxes.one.children),
-				]),
-				li([
-					input(new function(){
-						this.type = "checkbox";
-						this.value = "three";
-						checkboxes.three.checked && (this.checked = true);
-					}),
-					span(checkboxes.three.checked ? 'ON' : 'off'),
-				]),
-			])
-		),
+		.map(() => children2DOM(checkboxes)),
 	}
   ),
   { DOM: makeDOMDriver('#app') }

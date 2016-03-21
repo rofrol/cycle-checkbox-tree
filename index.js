@@ -27,6 +27,20 @@ function modifyProperty(obj, key, key2, value) {
 	}
 }
 
+function children2DOM(children) {
+	return typeof children === 'object' && Object.keys(children).length &&
+	ul(Object.keys(children).map(key =>
+		li([
+			input(new function() {
+				this.type = "checkbox";
+				this.value = key;
+				children[key].checked && (this.checked = true);
+			}),
+			span(children[key].checked ? 'ON' : 'off'),
+		])
+	));
+}
+
 Cycle.run(
   (drivers) => (
     { DOM: drivers.DOM.select('input').events('click')
@@ -44,17 +58,7 @@ Cycle.run(
 					    checkboxes.one.checked && (this.checked = true);
 					}),
 					span(checkboxes.one.checked ? 'ON' : 'off'),
-					Object.keys(checkboxes.one.children).length &&
-					ul(Object.keys(checkboxes.one.children).map(key =>
-						li([
-							input(new function() {
-							    this.type = "checkbox";
-								this.value = key;
-							    checkboxes.one.children[key].checked && (this.checked = true);
-							}),
-							span(checkboxes.one.children[key].checked ? 'ON' : 'off'),
-						])
-					)),
+					children2DOM(checkboxes.one.children),
 				]),
 				li([
 					input(new function(){

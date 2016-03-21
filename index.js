@@ -45,10 +45,7 @@ function children2DOM(children) {
 Cycle.run(
   (drivers) => (
     { DOM: drivers.DOM.select('input').events('click')
-		.map(ev => {
-			modifyProperty(checkboxes, ev.target.value, 'checked', ev.target.checked);
-			return checkboxes;
-		})
+		.map(ev => modifyProperty(checkboxes, ev.target.value, 'checked', ev.target.checked))
 		.startWith('')
 		.map(() => children2DOM(checkboxes)),
 	}

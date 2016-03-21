@@ -1,5 +1,5 @@
 import Cycle from '@cycle/core';
-import { hJSX, makeDOMDriver, input, ul, li, span } from '@cycle/dom';
+import { hJSX, makeDOMDriver, input, ul, li, span, label } from '@cycle/dom';
 
 const checkboxes = {
 	one: {
@@ -38,13 +38,15 @@ function children2DOM(children) {
 	return typeof children === 'object' && Object.keys(children).length &&
 	ul(Object.keys(children).map(key =>
 		li([
-			input(new function() {
-				this.type = "checkbox";
-				this.value = key;
-				children[key].checked && (this.checked = true);
-			}),
-			key, ' ',
-			span(children[key].checked ? 'ON' : 'off'),
+			label([
+				input(new function() {
+					this.type = "checkbox";
+					this.value = key;
+					children[key].checked && (this.checked = true);
+				}),
+				key, ' ',
+				span(children[key].checked ? 'ON' : 'off'),
+			]),
 			children2DOM(children[key].children),
 		])
 	)) || [];

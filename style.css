@@ -6,3 +6,9 @@ body {
 ul {
   list-style: none;
 }
+
+label {
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}

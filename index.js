@@ -6,6 +6,13 @@ const checkboxes = {
 		checked: true,
 		children: {
 			two: { checked: false },
+			four: {
+				checked: true,
+				children: {
+					five: { checked: false },
+					six: { checked: true },
+				},
+			},
 		},
 	},
 	three: { checked: false },
@@ -36,6 +43,7 @@ function children2DOM(children) {
 				this.value = key;
 				children[key].checked && (this.checked = true);
 			}),
+			key, ' ',
 			span(children[key].checked ? 'ON' : 'off'),
 			children2DOM(children[key].children),
 		])

@@ -39,10 +39,10 @@ function children2DOM(children) {
 	ul(Object.keys(children).map(key =>
 		li([
 			label([
-				input(new function() {
-					this.type = "checkbox";
+				input(new function newInput() {
+					this.type = 'checkbox';
 					this.value = key;
-					children[key].checked && (this.checked = true);
+					if (children[key].checked) this.checked = true;
 				}),
 				key, ' ',
 				span(children[key].checked ? 'ON' : 'off'),

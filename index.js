@@ -2,15 +2,38 @@ import Cycle from '@cycle/core';
 import { hJSX, makeDOMDriver, input, ul, li, span } from '@cycle/dom';
 
 const checkboxes = {
-	one: { checked: true },
-	two: { checked: false },
+	one: {
+		checked: true,
+		children: [
+			{
+				two: { checked: false },
+			},
+		]
+	},
 	three: { checked: false },
 };
+
+function modifyProperty(obj, key, key2, value) {
+	if (key in obj) {
+	    obj[key][key2] = value;
+	} else {
+		for (let k in obj) {
+			if ('children' in obj[k]) {
+				for (let i = 0; i < obj[k].children.length; ++i) {
+					modifyProperty(obj[k].children[i], key, key2, value);
+				}
+			}
+		}
+	}
+}
 
 Cycle.run(
   (drivers) => (
     { DOM: drivers.DOM.select('input').events('click')
-		.map(ev => Object.assign(checkboxes, { [ev.target.value]: { checked: ev.target.checked } }))
+		.map(ev => {
+			modifyProperty(checkboxes, ev.target.value, 'checked', ev.target.checked);
+			return checkboxes;
+		})
 		.startWith('')
 		.map(() =>
 			ul([
@@ -26,9 +49,9 @@ Cycle.run(
 							input(new function(){
 							    this.type = "checkbox";
 								this.value = "two";
-							    checkboxes.two.checked && (this.checked = true);
+							    checkboxes.one.children[0].two.checked && (this.checked = true);
 							}),
-							span(checkboxes.two.checked ? 'ON' : 'off'),
+							span(checkboxes.one.children[0].two.checked ? 'ON' : 'off'),
 						])
 					]),
 				]),

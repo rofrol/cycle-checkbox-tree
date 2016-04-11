@@ -6,9 +6,14 @@
   'rules': {
     'indent': [2, 'tab', { 'SwitchCase': 1, 'VariableDeclarator': 1 }],
     'quotes': [1, 'single', 'avoid-escape'],
-    'react/jsx-uses-react': [2, {'pragma': 'hJSX'}],
   },
   'plugins': [
     'react'
   ],
+  "settings": {
+    "react": {
+      "pragma": "hJSX",  // Pragma to use, default to "React"
+    }
+  },
+  "parser": "babel-eslint",
 }

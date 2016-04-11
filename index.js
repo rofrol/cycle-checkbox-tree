@@ -1,5 +1,5 @@
 import Cycle from '@cycle/core';
-import { hJSX, makeDOMDriver, input, ul, li, span, label } from '@cycle/dom';
+import { makeDOMDriver, input, ul, li, span, label } from '@cycle/dom';
 
 const checkboxes = {
 	one: {
@@ -20,7 +20,8 @@ const checkboxes = {
 
 function modifyProperty(obj, key, key2, value) {
 	if (key in obj) {
-	    obj[key][key2] = value;
+		/* eslint no-param-reassign: ["error", { "props": false }] */
+		obj[key][key2] = value;
 	} else {
 		for (const k in obj) {
 			if ('children' in obj[k]) {
